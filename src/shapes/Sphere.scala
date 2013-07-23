@@ -7,11 +7,11 @@ class Sphere(val center: Vec3, val r: Float) extends Shape {
 
   def intersect(ray: Ray): Boolean = {
     val v: Vec3 = this.center - ray.o
-    
+
     val b: Float = v * ray.dir
-//    println(b)
+    //    println(b)
     val det: Float = b * b - (v * v) + (this.r * this.r)
-//    println(det)
+    //    println(det)
     if (det < 0) return false
 
     val discSqrt = Math.sqrt(det)
@@ -25,7 +25,11 @@ class Sphere(val center: Vec3, val r: Float) extends Shape {
       ray.t = t1.toFloat
     else
       ray.t = t2.toFloat
- 
+
     return true
+  }
+
+  def normal(ip: Vec3): Vec3 = {
+    return (ip - this.center) * (1.0f / this.r)
   }
 }
